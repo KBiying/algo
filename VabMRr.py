@@ -11,31 +11,31 @@ class Solution(object):
                 return False
         return True
 
-    def checkInclusion(self, s1, s2):
+    def findAnagrams(self, s, p):
         """
-        :type s1: str
-        :type s2: str
+        :type s: str
+        :type p: str
         :rtype: bool
         """
         left, right = 0, 0
         valid = False
         need_dict = {}
-        for item in s1:
+        return_list = []
+        for item in p:
             if need_dict.get(item) == None:
                 need_dict[item] = 1
             else:
                 need_dict[item] += 1
-        print(need_dict)
 
-        while right < len(s2):
-            a = s2[right]
+        while right < len(s):
+            a = s[right]
             right += 1
-            valid = self.isCover(s2[left:right], need_dict)
+            valid = self.isCover(s[left:right], need_dict)
             while valid:
                 temp_len = right - left
-                if temp_len == len(s1):
-                    return True
-                d = s2[left]
+                if temp_len == len(p):
+                    return_list.append(left)
+                d = s[left]
                 left += 1
-                valid = self.isCover(s2[left:right], need_dict)
-        return False
+                valid = self.isCover(s[left:right], need_dict)
+        return return_list
